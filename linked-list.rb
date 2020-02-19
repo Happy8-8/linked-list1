@@ -22,7 +22,7 @@ end
 class Stack
 	attr_reader :data
 	
-    def initialize
+  def initialize
 		@data = nil
 	end
 	
@@ -35,43 +35,34 @@ class Stack
 			return
 		end
 
-		newData = @data ? LinkedListNode.new(value, @data) : LinkedListNode.new(value)
-		@data = newData
-
+		@data = LinkedListNode.new(value, @data)
 	end
 
 	def pop
+		return nil if @data.nil?
 
-		# Save the values of the item to pop
+		value = @data.value
+		@data = @data.next_node
 
-		last_pushed = LinkedListNode.new(@data.value, @data.next_node)
-
-		# Replace values with next item in the stack
-		
-		@data = last_pushed.next_node
-
-		# Return the value of the popped item
-		
-        return last_pushed
-    end
+		return value
+	end
 end
 
 
 def reverse_list(list)
     
-    stack = Stack.new
+  stack = Stack.new
 	
 	# Push in all values
 	
 	while list
-		next_node = list.next_node
-        stack.push(list.value)
-        list = next_node
+    stack.push(list.value)
+    list = list.next_node
 	end
 	
 	# Return the topmost stack item
 	
-    return stack.data
+  return stack.data
 end
 
 
