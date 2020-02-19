@@ -29,6 +29,22 @@ def reverse_list(list, previous=nil)
   end
 end
 
+def infinite_loop?(list)
+  tortoise = list.next_node
+  hare = list.next_node
+
+  until hare.nil?
+    hare = hare.next_node
+    return false if hare.nil?
+
+    hare = hare.next_node
+    tortoise = tortoise.next_node
+    return true if hare == tortoise
+  end
+
+  return false
+end
+
 
 
 node1 = LinkedListNode.new(37)
@@ -42,3 +58,7 @@ puts "-------"
 revlist = reverse_list(node3)
 
 print_values(revlist)
+
+puts infinite_loop?(node3)
+node1.next_node = node3 # creates an infinite loop
+puts infinite_loop?(node3)
